@@ -34,7 +34,6 @@ jobs:
           personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_branch: gh-pages
           allow_empty_commit: false
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build
           force_orphan: true
           enable_jekyll: false
