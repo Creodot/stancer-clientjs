@@ -90,7 +90,7 @@ You will find:
 To run the unit tests, use:
 
 ```bash
-npm test
+npm run test:unit
 ```
 
 ---
@@ -98,8 +98,8 @@ npm test
 ## 🤝 Contribution
 
 We welcome your contributions with enthusiasm! If you want to improve this SDK, follow these steps:
-1. Clone the repo: `git clone https://github.com/votre-repo/stancer-sdk.git`.
-2. Create a branch: `git checkout -b ma-fonctionnalite`.
+1. Clone the repo: `git clone https://github.com/Creodot/stancer-clientjs.git`.
+2. Create a branch from `develop`: `git checkout -b my-feature`.
 3. Make your changes and run the tests.
 4. Send a PR! 😄
 
