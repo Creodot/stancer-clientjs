@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "target": "es2016",
+      "module": "CommonJS",
+      "rootDir": "./",
+      "moduleResolution": "Node",
+      "baseUrl": "./",
+      "paths": {
+        "@/src/*": ["./src/*"],
+        "@/services/*": ["./src/services/*"],
+        "@/utils/*": ["./src/utils/*"],
+        "@/config/*": ["./src/config/*"],
+        "@/constants/*": ["./src/constants/*"],
+      },
+      "typeRoots": ["./node_modules/@types"],
+      "types": ["node", "jest"],
+      "allowJs": true,
+      "outDir": "./dist",
+      "declaration": true,
+      "declarationDir": "./dist",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "noImplicitAny": true,
+      "skipDefaultLibCheck": true,
+      "skipLibCheck": true
+    },
+    "include": ["src/**/*.ts", "test/**/*.ts"],
+    "exclude": ["node_modules", "dist"]
+  }

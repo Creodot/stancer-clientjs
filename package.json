@@ -1,0 +1,122 @@
+{
+  "name": "stancer-clientjs",
+  "version": "0.1.0",
+  "description": "SDK JS for Stancer.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "rimraf dist && tsc && tsc-alias && rimraf dist/test && rimraf dist/types/test",
+    "format": "biome check --write && biome format --write",
+    "lint": "biome lint --error-on-warnings --write",
+    "test:dev": "jest --watch",
+    "test:unit": "jest --passWithNoTests",
+    "prepare": "husky",
+    "docs": "yarn --cwd docs start",
+    "docs:start": "docusaurus start",
+    "docs:build": "docusaurus build",
+    "docs:deploy": "docusaurus deploy"
+  },
+  "keywords": [
+    "stancer",
+    "sdk",
+    "payments",
+    "typescript",
+    "clientjs",
+    "biomejs",
+    "api"
+  ],
+  "author": "Ton Nom",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/crypto-js": "^4.2.2",
+    "@types/jest": "^29.5.13",
+    "@types/node": "^22.7.6",
+    "husky": "^9.1.6",
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^3.10.2",
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn test:unit"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn format",
+      "yarn lint"
+    ],
+    "*.{json,md}": [
+      "yarn format"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@jest/|jest-))"
+    ],
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Test Report",
+          "includeFailureMsg": true,
+          "outputPath": "test_reports/report.html"
+        }
+      ]
+    ],
+    "moduleNameMapper": {
+      "^@/src/(.*)$": "<rootDir>/src/$1",
+      "^@/services/(.*)$": "<rootDir>/src/services/$1",
+      "^@/utils/(.*)$": "<rootDir>/src/utils/$1",
+      "^@/constants/(.*)$": "<rootDir>/src/constants/$1"
+    },
+    "transform": {
+      "^.+\\.ts?$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.test.json"
+        }
+      ]
+    },
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "testEnvironment": "node",
+    "setupFiles": [
+      "tsconfig-paths/register"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover",
+      "html"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/**/*.test.{js,jsx,ts,tsx}",
+      "!src/**/types.ts",
+      "!src/config/**/*",
+      "!**/__mocks__/**",
+      "!**/node_modules/**"
+    ]
+  }
+}
