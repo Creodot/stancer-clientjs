@@ -22,7 +22,7 @@ export type HttpClientReturns<T> = {
   statusCode: number;
 };
 
-export class HttpClientServiceImpl {
+export class HttpClientService {
   readonly TOKEN_KEY = 'zion-token';
   readonly defaultRequestConfig: RequestConfig = {
     headers: {

@@ -1,19 +1,44 @@
-export * from './types';
+import { CreditCardService } from '@/services/CreditCardService';
+import { CustomerService } from '@/services/CustomerService';
+import { DisputeService } from '@/services/DisputeService';
+import { PaymentService } from '@/services/PaymentService';
+import { PayoutService } from '@/services/PayoutService';
+import { RefundService } from '@/services/RefundService';
+import { SepaService } from '@/services/SepaService';
+import { NodeEnvironment } from '@/src/types/IClient';
+import { getNodeEnvironment } from '@/utils/getNodeEnvironment';
+import { IConfig } from './types';
 
-import { AuthService } from './services/auth';
+export class StancerClient {
+  private config: IConfig;
+  public environment: NodeEnvironment = getNodeEnvironment();
 
-export class StancerSDK {
-  public auth: AuthService;
+  public creditCardService: CreditCardService;
+  public customerService: CustomerService;
+  public disputeService: DisputeService;
+  public paymentService: PaymentService;
+  public payoutService: PayoutService;
+  public refundService: RefundService;
+  public sepaService: SepaService;
 
-  constructor(apiKey: string) {
-    if (!apiKey) {
-      throw new Error('API key is required to initialize the SDK.');
-    }
+  constructor(config: IConfig) {
+    this.config = config;
 
-    this.auth = new AuthService(apiKey);
+    this.creditCardService = new CreditCardService(this.config);
+    this.customerService = new CustomerService(this.config);
+    this.disputeService = new DisputeService(this.config);
+    this.paymentService = new PaymentService(this.config);
+    this.payoutService = new PayoutService(this.config);
+    this.refundService = new RefundService(this.config);
+    this.sepaService = new SepaService(this.config);
+  }
+
+  public getConfig(): IConfig {
+    return this.config;
+  }
+
+  public setConfig(config: IConfig): IConfig {
+    this.config = config;
+    return this.config;
   }
 }
-
-export const createStancerSDK = (apiKey: string): StancerSDK => {
-  return new StancerSDK(apiKey);
-};
