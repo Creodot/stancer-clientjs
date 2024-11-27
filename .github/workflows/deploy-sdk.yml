@@ -1,17 +1,25 @@
-name: Publish Package to npm
+name: Manual Version Bump and Publish
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: "Choose the type of version bump"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 permissions:
   contents: write
   packages: write
 
 jobs:
-  publish:
-    name: Publish to npm
+  bump-and-publish:
+    name: Bump Version, Tag, and Publish
     runs-on: ubuntu-latest
 
     steps:
@@ -24,50 +32,46 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org/'
 
-      - name: Configure npm authentication
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Format check
-        run: yarn format
+      - name: Bump version
+        id: bump_version
+        run: |
+          npm version ${{ github.event.inputs.bump_type }} --no-git-tag-version
+          echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
 
-      - name: Lint code
-        run: yarn lint
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add package.json package-lock.json
+          git commit -m "chore(release): bump version to ${{ env.VERSION }}"
+          git push origin HEAD:master
 
-      - name: Run unit tests
-        run: yarn test:unit
+      - name: Create Git Tag
+        run: |
+          git tag v${{ env.VERSION }}
+          git push origin v${{ env.VERSION }}
 
-      - name: Build the package
+      - name: Configure npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Build package
         run: yarn build
 
-      - name: Check if version already exists on npm
-        id: version-check
-        run: |
-          if npm show stancer-clientjs@$(node -p "require('./package.json').version") > /dev/null 2>&1; then
-            echo "Version already exists on npm. Skipping publish."
-            exit 0
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish to npm
-        if: steps.version-check.outcome == 'success'
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  
+
       - name: Create GitHub Release
-        id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          tag_name: v${{ env.VERSION }}
+          release_name: "v${{ env.VERSION }}"
           body: |
-            This release includes the following changes:
-            - See the [CHANGELOG](./CHANGELOG.md) for details.
+            Release of version v${{ env.VERSION }}.
+            See the [CHANGELOG](./CHANGELOG.md) for details.
           draft: false
           prerelease: false
