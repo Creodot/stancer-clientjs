@@ -17,6 +17,7 @@
     "test:unit": "jest --passWithNoTests",
     "prepare": "husky",
     "docs": "yarn --cwd docs start",
+    "tag": "node -e \"const version = require('./package.json').version; console.log('v' + version)\" | xargs -I {} git tag {} && git push origin {}",
     "docs:start": "docusaurus start",
     "docs:build": "docusaurus build",
     "docs:deploy": "docusaurus deploy"
