@@ -7,8 +7,7 @@ const config: Config = {
   tagline: 'The easiest way to integrate Stancer in your javascript project',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://stancer-clientjs.github.io',
+  url: 'https://creodot.github.io/stancer-clientjs',
   baseUrl: '/',
 
   organizationName: 'Creodot',
