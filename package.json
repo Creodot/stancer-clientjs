@@ -1,6 +1,6 @@
 {
   "name": "stancer-clientjs",
-  "version": "0.1.6",
+  "version": "1.0.0",
   "description": "SDK JS for Stancer.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
