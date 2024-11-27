@@ -9,9 +9,9 @@
 Add the SDK to your project with npm or Yarn:
 
 ```bash
-npm install stancer-sdk
+npm install stancer-clientjs
 # or
-yarn add stancer-sdk
+yarn add stancer-clientjs
 ```
 
 ---
