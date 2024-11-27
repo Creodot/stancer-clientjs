@@ -32,16 +32,18 @@
     "biomejs",
     "api"
   ],
-  "author": "Creodot Community",
+  "author": "Creodot Community <community@creodot.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Creodot/stancer-clientjs"
   },
+  "bugs": {
+    "url": "https://github.com/Creodot/stancer-clientjs/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/crypto-js": "^4.2.2",
     "@types/jest": "^29.5.13",
     "@types/node": "^22.7.6",
     "husky": "^9.1.6",
