@@ -1,75 +1,36 @@
-name: Test, Build and Publish NPM Package
+name: Publish Package to npm
 
 on:
   push:
-    branches:
-      - master
-
-permissions:
-  contents: write
-  packages: write
+    tags:
+      - 'v*.*.*'
 
 jobs:
-  test-and-publish:
+  publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        node-version: '20.x'
-        registry-url: 'https://npm.pkg.github.com'
-        cache: 'yarn'
-        scope: '@Courtiva'
-      
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-    
-    - name: Format check
-      run: yarn format
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@creodot'
 
-    - name: Lint
-      run: yarn lint
+      - name: Configure npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-    - name: Commit and push if changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Apply automatic formatting and linting" && git push)
+      - name: Install dependencies
+        run: yarn install
 
-    - name: Run tests
-      run: yarn test:unit
+      - name: Build the package
+        run: yarn build
 
-    - name: Build package
-      run: yarn build
-
-    - name: Get version
-      id: package-version
-      run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-
-    - name: Publish to GitHub Packages
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ steps.package-version.outputs.version }}
-        release_name: Release v${{ steps.package-version.outputs.version }}
-        body: |
-          Release of version ${{ steps.package-version.outputs.version }}
-          
-          For full details, see the [changelog](./CHANGELOG.md).
-        draft: false
-        prerelease: false
-          
-          
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
