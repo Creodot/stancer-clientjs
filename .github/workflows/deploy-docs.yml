@@ -21,7 +21,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn docs:install
 
       - name: Build Docusaurus
         run: yarn docs:build
