@@ -4,6 +4,9 @@
   "description": "SDK JS for Stancer.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.ts",
@@ -27,7 +30,7 @@
     "biomejs",
     "api"
   ],
-  "author": "Ton Nom",
+  "author": "Creodot Community",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
