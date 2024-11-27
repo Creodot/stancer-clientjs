@@ -68,7 +68,7 @@ console.log(customer);
 
 ## 📚 Documentation
 
-The complete documentation is available here: **[Stancer SDK Documentation](https://stancer-sdk.github.io/)**.
+The complete documentation is available here: **[Stancer ClientJS Documentation](https://creodot.github.io/stancer-clientjs/)**.
 
 You will find:
 - A guide to get started.
@@ -114,11 +114,11 @@ This project is under the **MIT** license. See the [LICENSE](LICENSE) file for m
 
 ## 🌟 Acknowledgements
 
-A big thanks to all those who use and contribute to **Stancer SDK JS**. Together, we make payments easier and accessible to everyone! ❤️
+A big thanks to all those who use and contribute to **Stancer ClientJS**. Together, we make payments easier and accessible to everyone! ❤️
 
 ---
 
 ### 🌐 Useful links:
 - **Official Stancer site** : [stancer.com](https://www.stancer.com)
-- **SDK Documentation** : [https://stancer-sdk.github.io/](https://stancer-sdk.github.io/)
-- **Issues & Feedback** : [https://github.com/votre-repo/stancer-sdk/issues](https://github.com/votre-repo/stancer-sdk/issues)
+- **SDK Documentation** : [https://creodot.github.io/stancer-clientjs/](https://creodot.github.io/stancer-clientjs/)
+- **Issues & Feedback** : [https://github.com/Creodot/stancer-clientjs/issues](https://github.com/Creodot/stancer-clientjs/issues)
