@@ -1,6 +1,8 @@
-import { CreditCardService } from '@/services/CreditCardService';
+import { CardService } from '@/services/CardService';
 import { CustomerService } from '@/services/CustomerService';
 import { DisputeService } from '@/services/DisputeService';
+import { MandateService } from '@/services/MandateService';
+import { PaymentIntentService } from '@/services/PaymentIntentService';
 import { PaymentService } from '@/services/PaymentService';
 import { PayoutService } from '@/services/PayoutService';
 import { RefundService } from '@/services/RefundService';
@@ -13,24 +15,28 @@ export class StancerClient {
   private config: IConfig;
   public environment: NodeEnvironment = getNodeEnvironment();
 
-  public creditCardService: CreditCardService;
   public customerService: CustomerService;
-  public disputeService: DisputeService;
-  public paymentService: PaymentService;
-  public payoutService: PayoutService;
-  public refundService: RefundService;
+  public cardService: CardService;
   public sepaService: SepaService;
+  public mandateService: MandateService;
+  public paymentService: PaymentService;
+  public paymentIntentService: PaymentIntentService;
+  public refundService: RefundService;
+  public disputeService: DisputeService;
+  public payoutService: PayoutService;
 
   constructor(config: IConfig) {
     this.config = config;
 
-    this.creditCardService = new CreditCardService(this.config);
     this.customerService = new CustomerService(this.config);
-    this.disputeService = new DisputeService(this.config);
-    this.paymentService = new PaymentService(this.config);
-    this.payoutService = new PayoutService(this.config);
-    this.refundService = new RefundService(this.config);
+    this.cardService = new CardService(this.config);
     this.sepaService = new SepaService(this.config);
+    this.mandateService = new MandateService(this.config);
+    this.paymentService = new PaymentService(this.config);
+    this.paymentIntentService = new PaymentIntentService(this.config);
+    this.refundService = new RefundService(this.config);
+    this.disputeService = new DisputeService(this.config);
+    this.payoutService = new PayoutService(this.config);
   }
 
   public getConfig(): IConfig {

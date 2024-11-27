@@ -2,7 +2,7 @@ import { CreditCardCreate, CreditCard as CreditCardInterface, CreditCardUpdate }
 import { IConfig } from '../types';
 import { HttpClientService } from './HttpService';
 
-export class CreditCardService {
+export class PaymentIntentService {
   private config: IConfig;
   private httpClient: HttpClientService;
 
