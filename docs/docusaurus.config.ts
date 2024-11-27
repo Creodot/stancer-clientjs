@@ -7,8 +7,8 @@ const config: Config = {
   tagline: 'The easiest way to integrate Stancer in your javascript project',
   favicon: 'img/favicon.ico',
 
-  url: 'https://creodot.github.io/stancer-clientjs',
-  baseUrl: '/',
+  url: 'https://creodot.github.io',
+  baseUrl: '/stancer-clientjs',
 
   organizationName: 'Creodot',
   projectName: 'stancer-clientjs',
