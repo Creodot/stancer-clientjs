@@ -45,7 +45,7 @@ jobs:
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git add package.json package-lock.json
+          git add package.json yarn.lock
           git commit -m "chore(release): bump version to ${{ env.VERSION }}"
           git push origin HEAD:master
 
