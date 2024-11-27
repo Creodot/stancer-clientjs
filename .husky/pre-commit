@@ -1,2 +1,35 @@
-#!/bin/sh
-yarn format && yarn lint && yarn test:unit
+# Save the staged files
+git diff --name-only --cached > /tmp/staged_files
+
+# Formatting
+yarn format
+
+# Linting
+yarn lint
+
+# Unit tests
+yarn test:unit
+
+# If the previous commands have succeeded, add the modified files
+if [ $? -eq 0 ]; then
+    # Check if there are any modified files
+    if [ -n "$(git diff --name-only)" ]; then
+        # Add the files modified by the formatting
+        git add $(git diff --name-only)
+    fi
+    
+    # Add the files initially staged that could have been modified
+    while IFS= read -r file; do
+        if [ -f "$file" ]; then
+            git add "$file"
+        fi
+    done < /tmp/staged_files
+    
+    # Clean up
+    rm /tmp/staged_files
+    
+    exit 0
+else
+    echo "The pre-commit hook failed. Commit cancelled."
+    exit 1
+fi
