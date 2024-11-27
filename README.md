@@ -1,6 +1,7 @@
 # Stancer ClientJS (SDK)
 
-![Stancer SDK](https://img.shields.io/badge/TypeScript-100%25-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Stancer SDK](https://img.shields.io/badge/TypeScript-100%25-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) [![npm version](https://img.shields.io/npm/v/stancer-clientjs)](https://www.npmjs.com/package/stancer-clientjs) [![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
+
 
 **Stancer ClientJS** is a simple and powerful tool to integrate Stancer's payment features into your TypeScript/JavaScript applications. Whether you're building an online store, a marketplace, or any other solution requiring secure payments, this SDK is designed for you. 🚀
 
