@@ -24,7 +24,7 @@ yarn add stancer-clientjs
 Import and configure the SDK with your Stancer API key:
 
 ```typescript
-import { createStancerSDK } from '@creodot/stancer-clientjs';
+import { createStancerSDK } from 'stancer-clientjs';
 
 const sdk = createStancerSDK('your-api-key');
 ```
